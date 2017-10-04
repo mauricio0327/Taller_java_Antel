@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 27-sep-2017, 11:14:36
+    Document   : okAltaUsuario
+    Created on : 28-sep-2017, 16:49:30
     Author     : e945952
 --%>
 
@@ -9,10 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Ok alta usuario</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <a href="altaUsuario.jsp" a>Agregar un usuario</a>
+        <h1>Usuario agregado correctamente</h1><br>
+        <A href="index.jsp"> Volver </A>
     </body>
 </html>
