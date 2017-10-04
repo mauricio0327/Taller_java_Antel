@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ServletUsuario extends HttpServlet {
 
+    private Fabrica fabrica;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -80,8 +81,8 @@ public class ServletUsuario extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         try {
-            ControladorAgencia CA = ControladorAgencia.getInstancia();
-            CA.agregarUsuario(request.getParameter("user"), request.getParameter("pass"),
+            IAdminAgencia IAA = fabrica.getiControladorAgencia();
+            IAA.agregarUsuario(request.getParameter("user"), request.getParameter("pass"),
             request.getParameter("nombre"),request.getParameter("apellido"), "Si");
             
             RequestDispatcher dis = request.getRequestDispatcher("okAltaUsuario.jsp");

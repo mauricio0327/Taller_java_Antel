@@ -35,7 +35,6 @@ public class ControladorAgencia implements IAdminAgencia{
     public void agregarUsuario(String user, String passwd, String nombre, String apellido, String admin) throws NamingException{
         
         try {
-            System.out.println("Entro al controlador");
             InitialContext initContext = new InitialContext();
             DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
             Connection conn = ds.getConnection(); 

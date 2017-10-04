@@ -11,6 +11,17 @@ package logica;
  */
 public class ControladorTerminales implements ITerminales{
 
+    private static ControladorTerminales instance = null;
+	
+    private ControladorTerminales(){}
+    
+    public static ControladorTerminales getInstancia(){
+	if(instance == null){
+        	instance = new ControladorTerminales();
+	}
+            return instance;
+    }
+    
     @Override
     public boolean loginUser(DtUsuario dtUser) {
         return true;
