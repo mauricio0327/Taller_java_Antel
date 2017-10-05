@@ -14,8 +14,8 @@
     <body>
         <h1>Hello World!</h1>
         <a href="altaUsuario.jsp" a>Agregar un usuario</a>
-        <form action="ServletPrueba" method="GET">
-            <input type="submit" value="Ingresar">
+        <form name="f1" action="Cliente" method="GET">
+            <input type="submit" name="submit" value="Venta ticket"/>
         </form>
     </body>
 </html>

@@ -8,7 +8,6 @@ package logica;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +19,8 @@ import javax.xml.ws.WebServiceRef;
  *
  * @author Salvador
  */
-@WebServlet(name = "ServletPrueba", urlPatterns = {"/ServletPrueba"})
-public class ServletPrueba extends HttpServlet {
+@WebServlet(name = "Cliente", urlPatterns = {"/Cliente"})
+public class Cliente extends HttpServlet {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/IMM/WSB2B.wsdl")
     private WSB2B_Service service;
@@ -37,15 +36,27 @@ public class ServletPrueba extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Entro a srlvet");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
             
-            
-            
-            
+            /*String name = request.getParameter("nm");
+            out.print(sayHello(name));*/
+            Ticket t = new Ticket();
+            t.setCantMin(23);
+            t.setCodigo("cualquiera");
+            t.setFechaVenta(Calendar.getInstance().getTime());
+            t.setImporteTotal(100);
+            t.setInicioEstacionamiento(Calendar.getInstance().getTime());
+            t.setMatricula("123456");
+            t.setNumero("1");
+            t.setTerminal("una");
+            Ticket t2 = new Ticket();
+            t2=ventaTK(t);
+            out.print(t.getCodigo());
+            t=t2;
+            out.print(t.getCodigo());
             
             
         } finally {
@@ -65,22 +76,7 @@ public class ServletPrueba extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("LLego");
-        Ticket t;
-        t = new Ticket();
-        t.setCodigo("");
-        t.setFechaVenta(Calendar.getInstance().getTime());
-        t.setImporteTotal(45);
-        t.setInicioEstacionamiento(Calendar.getInstance().getTime());
-        t.setMatricula("1234556");
-        t.setTerminal("una");
-        t.setNumero("");
-        t=this.ventaTK(t);
-        String temp = t.getCodigo()+" "+t.getNumero()+".";
-        request.setAttribute("mensaje", temp);
-        RequestDispatcher rd = request.getRequestDispatcher("default.jsp");           
-        rd.forward(request, response);
-        
+        processRequest(request, response);
     }
 
     /**
@@ -106,6 +102,13 @@ public class ServletPrueba extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private String sayHello(java.lang.String arg0) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        logica.WSB2B port = service.getWSB2BPort();
+        return port.sayHello(arg0);
+    }
 
     private Ticket ventaTK(logica.Ticket arg0) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
