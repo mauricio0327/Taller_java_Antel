@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://logica/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="WSB2B" targetNamespace="http://logica/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://logica/" elementFormDefault="unqualified" targetNamespace="http://logica/" version="1.0">
+
+  <xs:element name="ventaTK" type="tns:ventaTK"/>
+
+  <xs:element name="ventaTKResponse" type="tns:ventaTKResponse"/>
+
+  <xs:complexType name="ventaTK">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:ticket"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ticket">
+    <xs:sequence>
+      <xs:element name="cantMin" type="xs:int"/>
+      <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaVenta" type="xs:dateTime"/>
+      <xs:element name="importeTotal" type="xs:double"/>
+      <xs:element minOccurs="0" name="inicioEstacionamiento" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="matricula" type="xs:string"/>
+      <xs:element minOccurs="0" name="numero" type="xs:string"/>
+      <xs:element minOccurs="0" name="terminal" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ventaTKResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:ticket"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ventaTKResponse">
+    <wsdl:part element="tns:ventaTKResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ventaTK">
+    <wsdl:part element="tns:ventaTK" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="WSB2B">
+    <wsdl:operation name="ventaTK">
+      <wsdl:input message="tns:ventaTK" name="ventaTK">
+    </wsdl:input>
+      <wsdl:output message="tns:ventaTKResponse" name="ventaTKResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSB2BSoapBinding" type="tns:WSB2B">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ventaTK">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="ventaTK">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ventaTKResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSB2B">
+    <wsdl:port binding="tns:WSB2BSoapBinding" name="WSB2BPort">
+      <soap:address location="http://localhost:8080/IMM/WSB2B"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
