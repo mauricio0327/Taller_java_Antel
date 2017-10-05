@@ -27,4 +27,10 @@ public class WSB2B {
         }
         return tk;
     }
+    
+    @WebMethod
+    public String sayHello(String name){
+        return("Hello "+name);
+    }
+    
 }
