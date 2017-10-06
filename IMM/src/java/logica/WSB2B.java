@@ -16,14 +16,18 @@ import javax.jws.WebParam;
 @WebService(serviceName = "WSB2B")
 public class WSB2B {
 
+   // private Fabrica fabrica = Fabrica.getInstance();
+    private ControladorIMM controlador;
     /**
      * This is a sample web service operation
+     * @param tk
+     * @return 
      */
-    @WebMethod(operationName = "ventaTK")
+    @WebMethod(operationName = "ventaIMM")
     public Ticket venta(Ticket tk) {
-        ControladorIMM ctrl = new ControladorIMM();
-        if (ctrl.ventaTicket(tk)){
-            tk.setCodigo(ctrl.getCd());
+        //controlador = ControladorIMM.getInstancia();
+        if (ControladorIMM.getInstancia().ventaTicket(tk)){
+            tk.setCodigo(ControladorIMM.getInstancia().codGen());
         }
         return tk;
     }

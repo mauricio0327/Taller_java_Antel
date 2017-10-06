@@ -14,9 +14,19 @@ import java.util.Iterator;
  */
 public class ControladorIMM implements IAdminIMM{
     
-    private ArrayList<String> codigos = new ArrayList<String>();
-    private int cont = 0;
+    private ArrayList<String> codigos;
+    private int cont;
     private String cd; 
+    
+    private static ControladorIMM instance = null;
+	
+    
+    public static ControladorIMM getInstancia(){
+	if(instance == null){
+        	instance = new ControladorIMM();
+	}
+            return instance;
+    }
 
     public String getCd() {
         return cd;
@@ -27,7 +37,9 @@ public class ControladorIMM implements IAdminIMM{
     }
     
     public ControladorIMM(){
-
+        this.codigos= new ArrayList<String>();
+        this.cont = 0;
+        this.cd = "";
         
     }
 
