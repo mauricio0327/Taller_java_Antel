@@ -15,8 +15,10 @@ import java.util.Iterator;
 public class ControladorIMM implements IAdminIMM{
     
     private ArrayList<String> codigos;
+    private ArrayList<String> numeros;
+    private ArrayList<String> agencias;
     private int cont;
-    private String cd; 
+    
     
     private static ControladorIMM instance = null;
 	
@@ -28,18 +30,17 @@ public class ControladorIMM implements IAdminIMM{
             return instance;
     }
 
-    public String getCd() {
-        return cd;
-    }
-
-    public void setCd(String cd) {
-        this.cd = cd;
-    }
+    
     
     public ControladorIMM(){
         this.codigos= new ArrayList<String>();
+        this.numeros= new ArrayList<String>();
+        this.agencias= new ArrayList<String>();
+        this.agencias.add("agencia1");
+        this.agencias.add("agencia2");
+        this.agencias.add("agencia3");
         this.cont = 0;
-        this.cd = "";
+        
         
     }
 
@@ -57,27 +58,28 @@ public class ControladorIMM implements IAdminIMM{
     }
 
     
-    public boolean ventaTicket(Ticket ticket) {
-        boolean valida = true;
-        Iterator<String> it = codigos.iterator();
-        while (it.hasNext()){
-           if (it.equals(ticket.getCodigo())){
-               valida = false;
+    public String ventaTicket(Ticket ticket) {
+        String num = "";
+        boolean valida = false;
+        Iterator<String> it = agencias.iterator();
+        while ((it.hasNext())&&(!valida)){
+           if (it.equals(ticket.getAgencia())){
+               valida = true;
            }
         }
         if (valida){
-            this.codigos.add(codGen());
+            num = codGen();
+            this.codigos.add(num);
             
         }
         
-        return valida;
+        return num;
     }
 
     @Override
     public String codGen() {
         this.cont=(this.cont+1);
         int c = this.cont;
-        this.cd = String.valueOf(c);
         return String.valueOf(c);
         
     }

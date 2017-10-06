@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public interface IAdminIMM {
     public abstract boolean loginAdmin(DtUsuario dtUser);
-    public abstract boolean ventaTicket(Ticket ticket);
+    public abstract String ventaTicket(Ticket ticket);
     public String codGen();
     
 }

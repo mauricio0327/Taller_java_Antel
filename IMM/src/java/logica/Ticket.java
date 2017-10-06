@@ -16,7 +16,8 @@ public class Ticket {
     
     private String numero;
     private String codigo;
-    private String terminal;
+    private String terminal;    
+    private String agencia;
     private String matricula;
     private Date fechaVenta;
     private Date inicioEstacionamiento;
@@ -40,12 +41,12 @@ public class Ticket {
         this.codigo = codigo;
     }
 
-    public String getTerminal() {
-        return terminal;
+    public String getAgencia() {
+        return agencia;
     }
 
-    public void setTerminal(String terminal) {
-        this.terminal = terminal;
+    public void setAgencia(String agencia) {
+        this.agencia = agencia;
     }
 
     public String getMatricula() {
@@ -86,6 +87,14 @@ public class Ticket {
 
     public void setImporteTotal(double importeTotal) {
         this.importeTotal = importeTotal;
+    }
+    
+    public String getTerminal() {
+        return terminal;
+    }
+
+    public void setTerminal(String terminal) {
+        this.terminal = terminal;
     }
 
     public Ticket() {

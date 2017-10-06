@@ -25,10 +25,7 @@ public class WSB2B {
      */
     @WebMethod(operationName = "ventaIMM")
     public Ticket venta(Ticket tk) {
-        //controlador = ControladorIMM.getInstancia();
-        if (ControladorIMM.getInstancia().ventaTicket(tk)){
-            tk.setCodigo(ControladorIMM.getInstancia().codGen());
-        }
+        tk.setCodigo(ControladorIMM.getInstancia().ventaTicket(tk));
         return tk;
     }
     
