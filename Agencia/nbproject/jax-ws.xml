@@ -5,7 +5,7 @@
     <client name="WSB2B">
       <wsdl-url>http://localhost:8080/IMM/WSB2B?wsdl</wsdl-url>
       <local-wsdl-file>localhost_8080/IMM/WSB2B.wsdl</local-wsdl-file>
-      <package-name forceReplace="true">logica</package-name>
+      <package-name>logica</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -31,10 +31,6 @@
         <wsimport-option>
           <wsimport-option-name>xendorsed</wsimport-option-name>
           <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>package</wsimport-option-name>
-          <wsimport-option-value>logica</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>

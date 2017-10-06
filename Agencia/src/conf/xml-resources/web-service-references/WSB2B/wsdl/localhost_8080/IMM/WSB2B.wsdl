@@ -6,9 +6,9 @@
 
   <xs:element name="sayHelloResponse" type="tns:sayHelloResponse"/>
 
-  <xs:element name="ventaTK" type="tns:ventaTK"/>
+  <xs:element name="ventaIMM" type="tns:ventaIMM"/>
 
-  <xs:element name="ventaTKResponse" type="tns:ventaTKResponse"/>
+  <xs:element name="ventaIMMResponse" type="tns:ventaIMMResponse"/>
 
   <xs:complexType name="sayHello">
     <xs:sequence>
@@ -22,7 +22,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="ventaTK">
+  <xs:complexType name="ventaIMM">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="tns:ticket"/>
     </xs:sequence>
@@ -41,7 +41,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="ventaTKResponse">
+  <xs:complexType name="ventaIMMResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="tns:ticket"/>
     </xs:sequence>
@@ -53,16 +53,16 @@
     <wsdl:part element="tns:sayHello" name="parameters">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="ventaTKResponse">
-    <wsdl:part element="tns:ventaTKResponse" name="parameters">
+  <wsdl:message name="ventaIMMResponse">
+    <wsdl:part element="tns:ventaIMMResponse" name="parameters">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="sayHelloResponse">
     <wsdl:part element="tns:sayHelloResponse" name="parameters">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="ventaTK">
-    <wsdl:part element="tns:ventaTK" name="parameters">
+  <wsdl:message name="ventaIMM">
+    <wsdl:part element="tns:ventaIMM" name="parameters">
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="WSB2B">
@@ -72,10 +72,10 @@
       <wsdl:output message="tns:sayHelloResponse" name="sayHelloResponse">
     </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ventaTK">
-      <wsdl:input message="tns:ventaTK" name="ventaTK">
+    <wsdl:operation name="ventaIMM">
+      <wsdl:input message="tns:ventaIMM" name="ventaIMM">
     </wsdl:input>
-      <wsdl:output message="tns:ventaTKResponse" name="ventaTKResponse">
+      <wsdl:output message="tns:ventaIMMResponse" name="ventaIMMResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -90,12 +90,12 @@
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ventaTK">
+    <wsdl:operation name="ventaIMM">
       <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="ventaTK">
+      <wsdl:input name="ventaIMM">
         <soap:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="ventaTKResponse">
+      <wsdl:output name="ventaIMMResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

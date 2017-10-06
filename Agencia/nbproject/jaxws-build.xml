@@ -28,7 +28,7 @@
     </target>
     <target name="wsimport-client-WSB2B" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/WSB2B"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/WSB2B" destdir="${build.generated.dir}/jax-wsCache/WSB2B" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/WSB2B/wsdl/localhost_8080/IMM/WSB2B.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/IMM/WSB2B?wsdl" xnocompile="true" xendorsed="true" package="logica">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/WSB2B" destdir="${build.generated.dir}/jax-wsCache/WSB2B" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/WSB2B/wsdl/localhost_8080/IMM/WSB2B.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/IMM/WSB2B?wsdl" xnocompile="true" xendorsed="true">
             <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/WSB2B/wsdl/localhost_8080/IMM/WSB2B.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/WSB2B"/>
         </wsimport>

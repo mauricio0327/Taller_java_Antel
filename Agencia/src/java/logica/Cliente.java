@@ -8,6 +8,7 @@ package logica;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,8 +42,8 @@ public class Cliente extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
             
-            /*String name = request.getParameter("nm");
-            out.print(sayHello(name));*/
+            String name = request.getParameter("nm");
+            out.print(sayHello(name));
             Ticket t = new Ticket();
             t.setCantMin(23);
             t.setCodigo("cualquiera");
@@ -53,10 +54,13 @@ public class Cliente extends HttpServlet {
             t.setNumero("1");
             t.setTerminal("una");
             Ticket t2 = new Ticket();
-            t2=ventaTK(t);
-            out.print(t.getCodigo());
+            t2=ventaIMM(t);
+            String temp = t.getCodigo();
             t=t2;
-            out.print(t.getCodigo());
+            temp = temp+" "+t.getCodigo();
+            request.setAttribute("mensaje", sayHello(name)+temp);
+            RequestDispatcher rd = request.getRequestDispatcher("default.jsp");           
+            rd.forward(request, response);
             
             
         } finally {
@@ -110,11 +114,15 @@ public class Cliente extends HttpServlet {
         return port.sayHello(arg0);
     }
 
-    private Ticket ventaTK(logica.Ticket arg0) {
+    private Ticket ventaIMM(logica.Ticket arg0) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         logica.WSB2B port = service.getWSB2BPort();
-        return port.ventaTK(arg0);
+        return port.ventaIMM(arg0);
     }
+
+    
+
+    
 
 }
