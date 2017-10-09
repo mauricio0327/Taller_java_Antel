@@ -45,7 +45,7 @@ public class ServidorSocket {
                     ITerminales ITerm = fabrica.getiControladorTerminales();
                     ITerm.ventaTicketTerminal(ticket2);
                     ObjectOutputStream respuesta = new ObjectOutputStream(clienteAgencia.getOutputStream());
-                    respuesta.writeObject("Ticket vendido satisfactoriamente");
+                    respuesta.writeObject("Ticket "+ticket2.getNumero() +" vendido satisfactoriamente");
                 }else{
                     ObjectOutputStream respuesta = new ObjectOutputStream(clienteAgencia.getOutputStream());
                     respuesta.writeObject("Ticket rechazado");
