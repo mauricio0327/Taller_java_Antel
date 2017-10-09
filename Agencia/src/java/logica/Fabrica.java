@@ -5,6 +5,9 @@
  */
 package logica;
 
+
+import logica.ITerminales;
+import logica.IAdminAgencia;
 /**
  *
  * @author e945952
@@ -16,10 +19,7 @@ public class Fabrica {
   };
 
   public static Fabrica getInstance() {
-    /*
-     * if (instance!=null) return instance; else{ instance= new Fabrica();
-     * return instance; }
-     */
+
     if (instance == null)
       instance = new Fabrica();
     return instance;
@@ -31,8 +31,6 @@ public class Fabrica {
 
   public ITerminales getiControladorTerminales() {
     return ControladorTerminales.getInstancia();
-    /*
-     * hay que el getinstance de controlador espectaculo a operaci�n de clase
-     */
+
   }
 }

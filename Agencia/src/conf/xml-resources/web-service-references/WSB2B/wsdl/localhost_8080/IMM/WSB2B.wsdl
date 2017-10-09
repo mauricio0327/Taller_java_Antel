@@ -30,6 +30,7 @@
 
   <xs:complexType name="ticket">
     <xs:sequence>
+      <xs:element minOccurs="0" name="agencia" type="xs:string"/>
       <xs:element name="cantMin" type="xs:int"/>
       <xs:element minOccurs="0" name="codigo" type="xs:string"/>
       <xs:element minOccurs="0" name="fechaVenta" type="xs:dateTime"/>

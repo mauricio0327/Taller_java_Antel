@@ -13,7 +13,7 @@ public interface ITerminales {
     
     public abstract boolean loginUser(DtUsuario dtUser);
     
-    public abstract boolean ventaTicketTerminal(Ticket tk);
+    public abstract void ventaTicketTerminal(Ticket tk);
     
-    public abstract boolean anulacionTicketTerminal(String numero);
+    public abstract void anulacionTicketTerminal(String numero);
 }
