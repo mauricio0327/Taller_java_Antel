@@ -22,14 +22,25 @@ import javax.sql.DataSource;
 public class ControladorAgencia implements IAdminAgencia{
 
     private static ControladorAgencia instance = null;
+    private static String nombre;
 	
-    private ControladorAgencia(){}
+    private ControladorAgencia(){
+        nombre = "agencia1";
+    }
     
     public static ControladorAgencia getInstancia(){
 	if(instance == null){
         	instance = new ControladorAgencia();
 	}
             return instance;
+    }
+    
+    public static String getNombre() {
+        return nombre;
+    }
+
+    public static void setNombre(String nombre) {
+        ControladorAgencia.nombre = nombre;
     }
     
     @Override
