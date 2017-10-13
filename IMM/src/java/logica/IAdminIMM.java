@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public interface IAdminIMM {
     public abstract boolean loginAdmin(DtUsuario dtUser);
     public abstract String ventaTicket(Ticket ticket);
+    public abstract String anulacionTk(String numero, String agencia);
     public String codGen();
     
 }

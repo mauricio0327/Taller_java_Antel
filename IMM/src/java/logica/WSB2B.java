@@ -25,8 +25,16 @@ public class WSB2B {
      */
     @WebMethod(operationName = "ventaIMM")
     public Ticket venta(Ticket tk) {
-        tk.setCodigo(ControladorIMM.getInstancia().ventaTicket(tk));
-        return tk;
+        Ticket tk2 = new Ticket();
+        tk2 = tk;
+        tk2.setNumero(ControladorIMM.getInstancia().ventaTicket(tk));
+        return tk2;
+    }
+    
+    @WebMethod(operationName = "anulacionIMM")
+    public String anulacion(String numero, String agencia) {
+        String codigo = ControladorIMM.getInstancia().anulacionTk(numero, agencia);
+        return codigo;
     }
     
     @WebMethod
