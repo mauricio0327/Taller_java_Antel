@@ -71,17 +71,60 @@ public class ControladorIMM implements IAdminIMM{
     public String ventaTicket(Ticket ticket) {
         String num = "";
         boolean valida = false;
-        Iterator<String> it = agencias.iterator();
+        InitialContext initContext;
+        try {
+            initContext = new InitialContext();
+            DataSource ds;
+            ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+            
+            Connection conn = ds.getConnection(); 
+            PreparedStatement ps = conn.prepareStatement("select * from agencias"); 
+            ResultSet rs = ps.executeQuery();
+            String a2 = "";
+            while ((rs.next())&&(!valida)) {
+                if (rs.getString("nombre").equals(ticket.getAgencia())){
+                    valida=true;                   
+                }
+                        
+            }
+            if (valida){
+                PreparedStatement ps2 = conn.prepareStatement("select * from tickets"); 
+                ResultSet rs2 = ps2.executeQuery();
+                while (rs.next()){
+                    num=rs.getString("numero");
+                }
+                int n2 = Integer.parseInt(num);
+                n2=n2+1;
+                num = String.valueOf(n2);
+                PreparedStatement ps3 = conn.prepareStatement("INSERT INTO tickets (numero, codigo, agencia, matricula, fecha_venta, fecha_inicio, cantMin, importe) VALUES (?,?,?,?,?)");
+                ps3.setString(1, num);
+                ps3.setString(2, ticket.getCodigo());
+                ps3.setString(3, ticket.getAgencia());
+                ps3.setString(4, ticket.getMatricula());
+                ps3.setDate(5, new java.sql.Date(ticket.getFechaVenta().getTime()));
+                ps3.setDate(6, new java.sql.Date(ticket.getInicioEstacionamiento().getTime()));
+                ps3.setString(7, ticket.getCantMin());
+                ps3.setString(8, importe(ticket.getCantMin()));
+                ps3.executeUpdate();
+                ps3.close();
+                ps2.close();
+                ps.close();
+                conn.close();
+            
+        }
+            
+        } catch (NamingException ex) {
+            Logger.getLogger(ControladorIMM.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorIMM.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        /*Iterator<String> it = agencias.iterator();
         while ((it.hasNext())&&(!valida)){
            if (it.next().equals(ticket.getAgencia())){
                valida = true;
            }
-        }
-        if (valida){
-            num = codGen();
-            this.codigos.add(num);
-            
-        }
+        }*/
+        
         
         return num;
     }
@@ -93,6 +136,16 @@ public class ControladorIMM implements IAdminIMM{
         return String.valueOf(c);
         
     }
+    
+    @Override
+    public String importe(String minutos) {
+        int base = 50;
+        int min = Integer.parseInt(minutos);
+        int valor = base*(min/30);
+        return String.valueOf(valor);
+        
+    }
+    
     
    
     @Override
@@ -119,9 +172,24 @@ public class ControladorIMM implements IAdminIMM{
             }
             if ((numerobool)&&(a2.equals(agencia))){
                 c="A"+numero;
+                PreparedStatement ps3 = conn.prepareStatement("INSERT INTO tickets (numero, codigo, agencia, matricula, fecha_venta, fecha_inicio, cantMin, importe) VALUES (?,?,?,?,?)");
+                ps3.setString(1, rs.getString("numero"));
+                ps3.setString(2, c);
+                ps3.setString(3, rs.getString("agencia"));
+                ps3.setString(4, rs.getString("matricula"));
+                ps3.setDate(5, rs.getDate("fecha_venta"));
+                ps3.setDate(6, rs.getDate("fecha_inicio"));
+                ps3.setString(7, rs.getString("cantMin"));
+                ps3.setString(8, rs.getString("importe"));
+                ps3.executeUpdate();
+                ps3.close();
+                ps.close();
+                conn.close();
             } else {
                 c="NA";
             }
+            
+            
         } catch (NamingException ex) {
             Logger.getLogger(ControladorIMM.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
