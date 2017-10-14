@@ -16,13 +16,13 @@ public class Ticket {
     
     private String numero;
     private String codigo;
-    private String terminal;    
-    private String agencia;
+    private String terminal;
     private String matricula;
     private Date fechaVenta;
     private Date inicioEstacionamiento;
-    private int cantMin;
-    private double importeTotal;
+    private String cantMin;
+    private String importeTotal;
+    private String agencia;
     
 
     public String getNumero() {
@@ -73,19 +73,19 @@ public class Ticket {
         this.inicioEstacionamiento = inicioEstacionamiento;
     }
 
-    public int getCantMin() {
+    public String getCantMin() {
         return cantMin;
     }
 
-    public void setCantMin(int cantMin) {
+    public void setCantMin(String cantMin) {
         this.cantMin = cantMin;
     }
 
-    public double getImporteTotal() {
+    public String getImporteTotal() {
         return importeTotal;
     }
 
-    public void setImporteTotal(double importeTotal) {
+    public void setImporteTotal(String importeTotal) {
         this.importeTotal = importeTotal;
     }
     

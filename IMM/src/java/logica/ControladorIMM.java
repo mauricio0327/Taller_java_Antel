@@ -69,17 +69,19 @@ public class ControladorIMM implements IAdminIMM{
     
     @Override
     public String ventaTicket(Ticket ticket) {
-        String num = "";
+        String num = "0";
         boolean valida = false;
         InitialContext initContext;
         try {
             initContext = new InitialContext();
             DataSource ds;
             ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
-            
+            System.out.println("DS");
             Connection conn = ds.getConnection(); 
+            System.out.println("Connection");
             PreparedStatement ps = conn.prepareStatement("select * from agencias"); 
             ResultSet rs = ps.executeQuery();
+            System.out.println("Query");
             String a2 = "";
             while ((rs.next())&&(!valida)) {
                 if (rs.getString("nombre").equals(ticket.getAgencia())){
@@ -90,15 +92,20 @@ public class ControladorIMM implements IAdminIMM{
             if (valida){
                 PreparedStatement ps2 = conn.prepareStatement("select * from tickets"); 
                 ResultSet rs2 = ps2.executeQuery();
-                while (rs.next()){
-                    num=rs.getString("numero");
+                System.out.println("PS2");
+                //num=rs2.getString("numero");
+                while (rs2.next()){
+                    if((rs2.getString("codigo")).equals("")){
+                        num=rs2.getString("numero");                        
+                    }                        
                 }
                 int n2 = Integer.parseInt(num);
                 n2=n2+1;
-                num = String.valueOf(n2);
-                PreparedStatement ps3 = conn.prepareStatement("INSERT INTO tickets (numero, codigo, agencia, matricula, fecha_venta, fecha_inicio, cantMin, importe) VALUES (?,?,?,?,?)");
+                num = String.valueOf(n2);                
+                System.out.println(num);
+                PreparedStatement ps3 = conn.prepareStatement("INSERT INTO tickets (numero, codigo, agencia, matricula, fecha_venta, fecha_inicio, cantMin, importe) VALUES (?,?,?,?,?,?,?,?)");
                 ps3.setString(1, num);
-                ps3.setString(2, ticket.getCodigo());
+                ps3.setString(2, "");
                 ps3.setString(3, ticket.getAgencia());
                 ps3.setString(4, ticket.getMatricula());
                 ps3.setDate(5, new java.sql.Date(ticket.getFechaVenta().getTime()));
@@ -118,12 +125,7 @@ public class ControladorIMM implements IAdminIMM{
         } catch (SQLException ex) {
             Logger.getLogger(ControladorIMM.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /*Iterator<String> it = agencias.iterator();
-        while ((it.hasNext())&&(!valida)){
-           if (it.next().equals(ticket.getAgencia())){
-               valida = true;
-           }
-        }*/
+        
         
         
         return num;
@@ -172,7 +174,7 @@ public class ControladorIMM implements IAdminIMM{
             }
             if ((numerobool)&&(a2.equals(agencia))){
                 c="A"+numero;
-                PreparedStatement ps3 = conn.prepareStatement("INSERT INTO tickets (numero, codigo, agencia, matricula, fecha_venta, fecha_inicio, cantMin, importe) VALUES (?,?,?,?,?)");
+                PreparedStatement ps3 = conn.prepareStatement("INSERT INTO tickets (numero, codigo, agencia, matricula, fecha_venta, fecha_inicio, cantMin, importe) VALUES (?,?,?,?,?,?,?,?)");
                 ps3.setString(1, rs.getString("numero"));
                 ps3.setString(2, c);
                 ps3.setString(3, rs.getString("agencia"));

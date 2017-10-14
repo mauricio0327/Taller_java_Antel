@@ -28,6 +28,7 @@ public class WSB2B {
         Ticket tk2 = new Ticket();
         tk2 = tk;
         tk2.setNumero(ControladorIMM.getInstancia().ventaTicket(tk));
+        tk2.setImporteTotal(ControladorIMM.getInstancia().importe(tk.getCantMin()));
         return tk2;
     }
     
