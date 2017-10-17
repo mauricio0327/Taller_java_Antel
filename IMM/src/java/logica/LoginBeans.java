@@ -5,6 +5,7 @@
  */
 package logica;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +21,7 @@ import javax.faces.context.FacesContext;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
 
 /**
  *
@@ -54,7 +56,7 @@ public class LoginBeans {
         this.pass = pass;
     }
     
-    public String logeo() throws NamingException, SQLException{
+    public void logeo() throws NamingException, SQLException{
         String mensaje="";
         DtUsuario usuario = new DtUsuario();
         try {
@@ -66,20 +68,28 @@ public class LoginBeans {
             PreparedStatement ps = conn.prepareStatement("select * from userimm"); 
             ResultSet rs = ps.executeQuery();
             String a2 = "";
+            String n1 = "";
+            String a1 = "";
             boolean userbool = false;
+            System.out.println("Antes del while");
             while ((rs.next())&&(!userbool)) {
                 if (rs.getString("user").equals(user)){
                     userbool=true;
                     a2=rs.getString("pass");
+                    a1=rs.getString("apellido");
+                    n1=rs.getString("nombre");
+                    
                 }    
             }
             
                 if (pass.equals(a2)){
-                    mensaje = "Logeo existoso";
-                    usuario.setApellido(rs.getString("apellido"));
-                    usuario.setNombre(rs.getString("nombre"));
-                    usuario.setPass(rs.getString("pass"));
-                    usuario.setUserName(rs.getString("user"));
+                    mensaje = "Logeo existoso";                    
+                    usuario.setApellido(a1);
+                    usuario.setNombre(n1);
+                    usuario.setPass(a2);
+                    usuario.setUserName(user);
+                    ControladorIMM.getInstancia().setUsuario(usuario);
+                    ControladorIMM.getInstancia().setLogeo(true);
                 } else {
                     if (userbool){
                         mensaje = "contrasena invalida";
@@ -89,13 +99,14 @@ public class LoginBeans {
                 }
         ps.close();
         conn.close();
+        System.out.println(mensaje);
         FacesContext.getCurrentInstance().addMessage("idMessaDge", new FacesMessage(mensaje));
         } catch (NamingException ex) {
             Logger.getLogger(ControladorIMM.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ControladorIMM.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return mensaje;
+        
     }
     
 }

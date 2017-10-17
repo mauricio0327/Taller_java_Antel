@@ -27,6 +27,8 @@ public class ControladorIMM implements IAdminIMM{
     private ArrayList<String> numeros;
     private ArrayList<String> agencias;
     private int cont;
+    private boolean logeo;
+    private DtUsuario usuario;
     
     
     private static ControladorIMM instance = null;
@@ -49,6 +51,7 @@ public class ControladorIMM implements IAdminIMM{
         this.agencias.add("agencia2");
         this.agencias.add("agencia3");
         this.cont = 0;
+        this.logeo = false;
         
         
     }
@@ -65,6 +68,24 @@ public class ControladorIMM implements IAdminIMM{
     public boolean loginAdmin(DtUsuario dtUser) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public boolean isLogeo() {
+        return logeo;
+    }
+
+    public void setLogeo(boolean logeo) {
+        this.logeo = logeo;
+    }
+
+    public DtUsuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(DtUsuario usuario) {
+        this.usuario = usuario;
+    }
+    
+    
 
     
     @Override

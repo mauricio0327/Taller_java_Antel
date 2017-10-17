@@ -26,14 +26,14 @@ and open the template in the editor.
                 <h:outputText value="Usuario"></h:outputText>
                 <h:inputText value="#{loginBeans.user}" required="true" requiredMessage="Campo user obligatorio"></h:inputText>
                 <h:outputText value="Pass"></h:outputText>
-                <h:inputText value="#{loginBeans.pass}" required="true" requiredMessage="Campo pass obligatorio"></h:inputText>
+                <h:inputSecret value="#{loginBeans.pass}" required="true" requiredMessage="Campo pass obligatorio"></h:inputSecret>
                 
                 
             </h:panelGrid>
             <h:commandButton value="Ingresar" action="#{loginBeans.logeo()}"></h:commandButton>
             
         </h:form>
-        <h:form><h:commandButton value="Volver" action="index"></h:commandButton></h:form>
+        <h:form><h:commandButton value="Siguiente" action="index"></h:commandButton></h:form>
         
     </h:body>
     </center>
