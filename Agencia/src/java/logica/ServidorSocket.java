@@ -66,11 +66,17 @@ public class ServidorSocket {
                     
                     controlIMM = ControladorIMM.getInstancia();
                     String codigo = controlIMM.anulacionTicketIMM(datosTk[1], "agencia1");
-                    fabrica = Fabrica.getInstance();
-                    ITerm = fabrica.getiControladorTerminales();
-                    ITerm.anulacionTicketTerminal(datosTk[0], codigo);
-                    ObjectOutputStream respuesta = new ObjectOutputStream(clienteAgencia.getOutputStream());
-                    respuesta.writeObject("Ticket "+datosTk[1] +" anulado");
+                    System.out.println(codigo);
+                    if (codigo.equals("NA")){
+                        ObjectOutputStream respuesta = new ObjectOutputStream(clienteAgencia.getOutputStream());
+                        respuesta.writeObject("No es posible anular el ticket "+datosTk[0]);
+                    }else{
+                        fabrica = Fabrica.getInstance();
+                        ITerm = fabrica.getiControladorTerminales();
+                        ITerm.anulacionTicketTerminal(datosTk[0], codigo);
+                        ObjectOutputStream respuesta = new ObjectOutputStream(clienteAgencia.getOutputStream());
+                        respuesta.writeObject("Ticket "+datosTk[1] +" anulado");
+                    }
                     
                 }else{
                     ObjectOutputStream respuesta = new ObjectOutputStream(clienteAgencia.getOutputStream());
