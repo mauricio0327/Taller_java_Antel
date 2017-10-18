@@ -91,6 +91,7 @@ public class ControladorIMM implements IAdminIMM{
     @Override
     public String ventaTicket(Ticket ticket) {
         String num = "0";
+        String num2 = "0";
         boolean valida = false;
         InitialContext initContext;
         try {
@@ -117,7 +118,10 @@ public class ControladorIMM implements IAdminIMM{
                 //num=rs2.getString("numero");
                 while (rs2.next()){
                     if((rs2.getString("codigo")).equals("")){
-                        num=rs2.getString("numero");                        
+                        num2=rs2.getString("numero");
+                        if ((Integer.parseInt(num2))>(Integer.parseInt(num))){
+                            num=num2;
+                        }
                     }                        
                 }
                 int n2 = Integer.parseInt(num);
@@ -129,8 +133,8 @@ public class ControladorIMM implements IAdminIMM{
                 ps3.setString(2, "");
                 ps3.setString(3, ticket.getAgencia());
                 ps3.setString(4, ticket.getMatricula());
-                ps3.setDate(5, new java.sql.Date(ticket.getFechaVenta().getTime()));
-                ps3.setDate(6, new java.sql.Date(ticket.getInicioEstacionamiento().getTime()));
+                ps3.setTimestamp(5, new java.sql.Timestamp(ticket.getFechaVenta().getTime()));
+                ps3.setTimestamp(6, new java.sql.Timestamp(ticket.getInicioEstacionamiento().getTime()));
                 ps3.setString(7, ticket.getCantMin());
                 ps3.setString(8, importe(ticket.getCantMin()));
                 ps3.executeUpdate();
