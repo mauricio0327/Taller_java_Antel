@@ -39,8 +39,16 @@ public class ReportesBeans {
     private ArrayList<Ticket> tickets;
     public ReportesBeans() {
     }
+
+    public ArrayList<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(ArrayList<Ticket> tickets) {
+        this.tickets = tickets;
+    }
     
-    public void ReportesMensuales() throws SQLException, NamingException{
+    public void reportesMensuales() throws SQLException, NamingException{
         Calendar now = Calendar.getInstance();
         int mes = now.get(Calendar.MONTH);
         tickets = new ArrayList<Ticket>();
@@ -51,6 +59,7 @@ public class ReportesBeans {
             Connection conn = ds.getConnection(); 
             PreparedStatement ps = conn.prepareStatement("select * from tickets"); 
             ResultSet rs = ps.executeQuery();
+            System.out.println("llego");
             
             while (rs.next()) {
                 Date dat = rs.getTimestamp("fecha_venta");

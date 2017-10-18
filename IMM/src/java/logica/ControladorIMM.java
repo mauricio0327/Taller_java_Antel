@@ -164,6 +164,9 @@ public class ControladorIMM implements IAdminIMM{
     public String importe(String minutos) {
         int base = 50;
         int min = Integer.parseInt(minutos);
+        if (min<30){
+            min=min+30;
+        }
         int valor = base*(min/30);
         return String.valueOf(valor);
         
@@ -193,7 +196,9 @@ public class ControladorIMM implements IAdminIMM{
                 }
                         
             }
+            System.out.println((numerobool)&&(a2.equals(agencia)));
             if ((numerobool)&&(a2.equals(agencia))){
+                System.out.println("Llego antes de BD anulacion");
                 c="A"+numero;
                 PreparedStatement ps3 = conn.prepareStatement("INSERT INTO tickets (numero, codigo, agencia, matricula, fecha_venta, fecha_inicio, cantMin, importe) VALUES (?,?,?,?,?,?,?,?)");
                 ps3.setString(1, rs.getString("numero"));
