@@ -69,7 +69,7 @@ public class ServidorSocket {
                     System.out.println(codigo);
                     if (codigo.equals("NA")){
                         ObjectOutputStream respuesta = new ObjectOutputStream(clienteAgencia.getOutputStream());
-                        respuesta.writeObject("No es posible anular el ticket "+datosTk[0]);
+                        respuesta.writeObject("No es posible anular el ticket "+datosTk[1]);
                     }else{
                         fabrica = Fabrica.getInstance();
                         ITerm = fabrica.getiControladorTerminales();
@@ -80,7 +80,7 @@ public class ServidorSocket {
                     
                 }else{
                     ObjectOutputStream respuesta = new ObjectOutputStream(clienteAgencia.getOutputStream());
-                    respuesta.writeObject("No es posible anular el ticket "+datosTk[0]);
+                    respuesta.writeObject("No es posible anular el ticket "+datosTk[1]);
                 }               
             }
             ObjectInputStream entrada2 = new ObjectInputStream(clienteAgencia.getInputStream());           
