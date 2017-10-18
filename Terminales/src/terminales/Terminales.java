@@ -34,7 +34,7 @@ public class Terminales {
     public static void main(String[] args) throws SQLException {
         try {
             // TODO code application logic here
-            String nombre = "terminal1";
+            String nombre;
     /*        boolean existeu = false;
             boolean logeo = false;
             String passbd = "";
@@ -67,7 +67,11 @@ public class Terminales {
             }
 */
             try (Socket clienteTerminal = new Socket("localhost", 5000)) {
-                System.out.println("Bienvenido a su terminal");
+                System.out.println("Ingrese el nombre de su terminal");
+                BufferedReader nombreTerm = new BufferedReader(new InputStreamReader(System.in));
+                nombre = nombreTerm.readLine();
+                
+                System.out.println();
                 System.out.println("Que desea hacer:");
                 System.out.println("1 - Venta de ticket");
                 System.out.println("2 - Anulacion de ticket");

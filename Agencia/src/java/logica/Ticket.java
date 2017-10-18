@@ -31,7 +31,7 @@ public class Ticket {
         this.fechaVenta = fechaVenta;
         this.inicioEstacionamiento = inicioEstacionamiento;
         this.cantMin = cantMin;
-        this.importeTotal = importeTotal;
+        this.importeTotal = "0";
         this.agencia = agencia;
     }
 

@@ -52,7 +52,7 @@ public class ControladorTerminales implements ITerminales{
             ps.setString(2, "");
             ps.setString(3, tk.getTerminal());
             ps.setString(4, tk.getMatricula());
-            ps.setDate(5, (Date) tk.getFechaVenta());
+            ps.setDate(5, new java.sql.Date(tk.getFechaVenta().getTime()));
             ps.setString(6, tk.getImporteTotal());
             ps.executeUpdate();
             ps.close();
