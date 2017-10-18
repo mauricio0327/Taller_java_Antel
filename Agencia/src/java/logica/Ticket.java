@@ -25,6 +25,7 @@ public class Ticket {
 
     public Ticket(String numero, String terminal, String matricula, Date fechaVenta, Date inicioEstacionamiento, String cantMin, String importeTotal, String agencia) {
         this.numero = numero;
+        this.codigo = "";
         this.terminal = terminal;
         this.matricula = matricula;
         this.fechaVenta = fechaVenta;

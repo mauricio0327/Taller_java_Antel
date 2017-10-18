@@ -31,17 +31,21 @@ public class ServidorSocket {
             ServerSocket serverSocket = new ServerSocket(5000);
             System.out.println("servidor corriendo");
             Socket clienteAgencia = serverSocket.accept();
+            ControladorIMM controlIMM;
+            Fabrica fabrica = Fabrica.getInstance();
+            
             ObjectInputStream entrada1 = new ObjectInputStream(clienteAgencia.getInputStream());           
             String accion = (String) entrada1.readObject();
+            while (!accion.equals("salir")){
             if (accion.equals("venta")){
                 ObjectInputStream entrada2 = new ObjectInputStream(clienteAgencia.getInputStream());           
                 String[] datosTk = (String[]) entrada2.readObject();
                 Date inicioEstacionamiento = ParseFecha(datosTk[2]);
                 Ticket ticket = new Ticket("", datosTk[0], datosTk[1], new Date(), inicioEstacionamiento, datosTk[3], datosTk[4], "agencia1");
-                ControladorIMM controlIMM = ControladorIMM.getInstancia();
+                controlIMM = ControladorIMM.getInstancia();
                 Ticket ticket2 = controlIMM.ventaTicketIMM(ticket);
                 if (!ticket2.getNumero().equals("")){
-                    Fabrica fabrica = Fabrica.getInstance();
+                    fabrica = Fabrica.getInstance();
                     ITerminales ITerm = fabrica.getiControladorTerminales();
                     ITerm.ventaTicketTerminal(ticket2);
                     ObjectOutputStream respuesta = new ObjectOutputStream(clienteAgencia.getOutputStream());
@@ -51,11 +55,30 @@ public class ServidorSocket {
                     respuesta.writeObject("Ticket rechazado");
                 }
             }
-            else{    
+            else if (accion.equals("anulacion")){    
                 
-                ObjectOutputStream respuesta = new ObjectOutputStream(clienteAgencia.getOutputStream());
-                respuesta.writeObject("Esa opcion no esta desarrollada, dame tiempo amigo");
+                ObjectInputStream entrada2 = new ObjectInputStream(clienteAgencia.getInputStream());           
+                String[] datosTk = (String[]) entrada2.readObject();
+                fabrica = Fabrica.getInstance();
+                ITerminales ITerm = fabrica.getiControladorTerminales();
                 
+                if (ITerm.controlAnulacion(datosTk[0])){
+                    
+                    controlIMM = ControladorIMM.getInstancia();
+                    String codigo = controlIMM.anulacionTicketIMM(datosTk[1], "agencia1");
+                    fabrica = Fabrica.getInstance();
+                    ITerm = fabrica.getiControladorTerminales();
+                    ITerm.anulacionTicketTerminal(datosTk[0], codigo);
+                    ObjectOutputStream respuesta = new ObjectOutputStream(clienteAgencia.getOutputStream());
+                    respuesta.writeObject("Ticket "+datosTk[1] +" anulado");
+                    
+                }else{
+                    ObjectOutputStream respuesta = new ObjectOutputStream(clienteAgencia.getOutputStream());
+                    respuesta.writeObject("No es posible anular el ticket "+datosTk[0]);
+                }               
+            }
+            ObjectInputStream entrada2 = new ObjectInputStream(clienteAgencia.getInputStream());           
+            accion = (String) entrada2.readObject();
             }
             clienteAgencia.close();
             serverSocket.close();
