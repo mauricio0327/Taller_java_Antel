@@ -15,5 +15,7 @@ public interface ITerminales {
     
     public abstract void ventaTicketTerminal(Ticket tk);
     
-    public abstract void anulacionTicketTerminal(String numero);
+    public abstract void anulacionTicketTerminal(String numero, String codigo);
+    
+    public abstract boolean controlAnulacion(String numero);
 }

@@ -8,6 +8,7 @@ package logica;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,13 +42,14 @@ public class ControladorTerminales implements ITerminales{
     public void ventaTicketTerminal(Ticket tk) {
                 
         try {
+
             InitialContext initContext = new InitialContext();
             DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
             Connection conn = ds.getConnection(); 
             PreparedStatement ps = conn.prepareStatement("INSERT INTO ticketst (numero, codigo, terminal, "
                     + "matricula, fechaVenta, importe) VALUES (?,?,?,?,?,?)");
             ps.setString(1, tk.getNumero());
-            ps.setString(2, tk.getCodigo());
+            ps.setString(2, "");
             ps.setString(3, tk.getTerminal());
             ps.setString(4, tk.getMatricula());
             ps.setDate(5, new java.sql.Date(tk.getFechaVenta().getTime()));
@@ -64,7 +66,53 @@ public class ControladorTerminales implements ITerminales{
     }
 
     @Override
-    public void anulacionTicketTerminal(String numero) {
+    public boolean controlAnulacion(String numero){
+        
+        boolean b = true;
+        try {
+            
+            InitialContext initContext = new InitialContext();
+            DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+            Connection conn = ds.getConnection(); 
+            PreparedStatement ps = conn.prepareStatement("select * from ticketst where numero = ?"); 
+            ps.setString(1, numero);
+            ResultSet rs = ps.executeQuery();
+            if (rs.first()){
+                if(!rs.getString("codigo").equals("")){
+                    b = false;
+                }
+            }else{
+                b = false;
+            }            
+            ps.close();
+            conn.close();
+            
+        }catch (SQLException ex) {
+            System.out.println("Error al conectar SQL");
+        } catch (NamingException ex) {
+            Logger.getLogger(ControladorTerminales.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return b;
+    };
+    
+    @Override
+    public void anulacionTicketTerminal(String numero, String codigo) {
+        
+         try {
+            InitialContext initContext = new InitialContext();
+            DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+            Connection conn = ds.getConnection(); 
+            PreparedStatement ps = conn.prepareStatement("UPDATE ticketst SET codigo = ? WHERE numero = ?");           
+            ps.setString(1,codigo);
+            ps.setString(2,numero);
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+        }catch (SQLException ex) {
+            System.out.println("Error al conectar SQL");
+        } catch (NamingException ex) {
+            Logger.getLogger(ControladorTerminales.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
