@@ -6,7 +6,22 @@
         <title>IMM</title>
     </h:head>
     <h:body>
-          <h:form><h:commandButton value="Reporte mensual" action="listadomensual"></h:commandButton></h:form>
+          <h:form>
+              <h:panelGrid columns="1">
+                  <h:outputText value="#{reportesBeans.bienvenida()}"></h:outputText>
+                  <h:commandButton value="Reporte mensual" action="#{reportesBeans.reportesMensuales()}"></h:commandButton>
+              </h:panelGrid>
+          </h:form>
+              
+          <h:form>
+              <h:panelGrid columns="2">
+                <h:outputText value="Fecha inicio en formato dd/mm/aaaa"></h:outputText>
+                <h:inputText value="#{reportesBeans.fechaInicio}" required="true" requiredMessage="Campo fecha obligatorio"></h:inputText>
+                <h:outputText value="Fecha fin en formato dd/mm/aaaa"></h:outputText>
+                <h:inputText value="#{reportesBeans.fechaFin}" required="true" requiredMessage="Campo fecha obligatorio"></h:inputText>
+                <h:commandButton value="Reporte mensual" action="#{reportesBeans.reportesPorFechas()}"></h:commandButton>
+              </h:panelGrid>
+          </h:form>
     </h:body>
 </html>
 

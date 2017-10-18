@@ -109,4 +109,16 @@ public class LoginBeans {
         
     }
     
+    public String direccion() {
+        String pagina = "login";
+        if (ControladorIMM.getInstancia().isLogeo()){
+            pagina = "index";
+        } else {
+            pagina = "login";
+            FacesContext.getCurrentInstance().addMessage("idMessaDge", new FacesMessage("Necesita estar logeado"));
+        }
+        
+        return pagina;
+    }
+    
 }
