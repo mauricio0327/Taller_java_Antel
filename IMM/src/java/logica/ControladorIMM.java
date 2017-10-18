@@ -196,7 +196,9 @@ public class ControladorIMM implements IAdminIMM{
                 }
                         
             }
+            System.out.println((numerobool)&&(a2.equals(agencia)));
             if ((numerobool)&&(a2.equals(agencia))){
+                System.out.println("Llego antes de BD anulacion");
                 c="A"+numero;
                 PreparedStatement ps3 = conn.prepareStatement("INSERT INTO tickets (numero, codigo, agencia, matricula, fecha_venta, fecha_inicio, cantMin, importe) VALUES (?,?,?,?,?,?,?,?)");
                 ps3.setString(1, rs.getString("numero"));
