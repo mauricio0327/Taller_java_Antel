@@ -14,9 +14,10 @@ import java.util.logging.Logger;
  *
  * @author e945952
  */
-public class ServidorSocket {
+public class ServidorSocket extends Thread{
     
-    public static void main(String[] args){       
+    @Override
+    public void run(){       
         
         try {          
             ServerSocket serverSocket = new ServerSocket(5000);

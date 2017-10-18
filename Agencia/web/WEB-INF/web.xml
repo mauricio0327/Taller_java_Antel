@@ -8,6 +8,10 @@
         <servlet-name>ServletPrueba</servlet-name>
         <servlet-class>logica.ServletPrueba</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletPrincipal</servlet-name>
+        <servlet-class>logica.ServletPrincipal</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsuario</servlet-name>
         <url-pattern>/ServletUsuario</url-pattern>
@@ -17,8 +21,12 @@
         <url-pattern>/ServletPrueba</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>ServletPrincipal</welcome-file>
     </welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>ServletPrincipal</servlet-name>
+        <url-pattern>/ServletPrincipal</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
