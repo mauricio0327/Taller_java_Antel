@@ -189,26 +189,26 @@ public class ControladorIMM implements IAdminIMM{
             PreparedStatement ps = conn.prepareStatement("select * from tickets"); 
             ResultSet rs = ps.executeQuery();
             String a2 = "";
+            String c1 = "";
             while ((rs.next())&&(!numerobool)) {
                 if (rs.getString("numero").equals(numero)){
+                    
                     numerobool=true;
                     a2=rs.getString("agencia");
+                    c1=rs.getString("codigo");
                 }
                         
             }
             System.out.println((numerobool)&&(a2.equals(agencia)));
+            if (!c1.equals("")){
+                numerobool=false;
+            }
             if ((numerobool)&&(a2.equals(agencia))){
                 System.out.println("Llego antes de BD anulacion");
                 c="A"+numero;
-                PreparedStatement ps3 = conn.prepareStatement("INSERT INTO tickets (numero, codigo, agencia, matricula, fecha_venta, fecha_inicio, cantMin, importe) VALUES (?,?,?,?,?,?,?,?)");
-                ps3.setString(1, rs.getString("numero"));
-                ps3.setString(2, c);
-                ps3.setString(3, rs.getString("agencia"));
-                ps3.setString(4, rs.getString("matricula"));
-                ps3.setDate(5, rs.getDate("fecha_venta"));
-                ps3.setDate(6, rs.getDate("fecha_inicio"));
-                ps3.setString(7, rs.getString("cantMin"));
-                ps3.setString(8, rs.getString("importe"));
+                PreparedStatement ps3 = conn.prepareStatement("UPDATE tickets SET codigo = ? WHERE numero = ?");           
+                ps3.setString(1,c);
+                ps3.setString(2,numero);
                 ps3.executeUpdate();
                 ps3.close();
                 ps.close();
