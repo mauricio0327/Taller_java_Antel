@@ -164,6 +164,9 @@ public class ControladorIMM implements IAdminIMM{
     public String importe(String minutos) {
         int base = 50;
         int min = Integer.parseInt(minutos);
+        if (min<30){
+            min=min+30;
+        }
         int valor = base*(min/30);
         return String.valueOf(valor);
         
