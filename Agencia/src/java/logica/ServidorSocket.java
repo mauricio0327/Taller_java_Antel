@@ -33,6 +33,7 @@ public class ServidorSocket {
             Socket clienteAgencia = serverSocket.accept();
             ObjectInputStream entrada1 = new ObjectInputStream(clienteAgencia.getInputStream());           
             String accion = (String) entrada1.readObject();
+            while (!accion.equals("salir")){
             if (accion.equals("venta")){
                 ObjectInputStream entrada2 = new ObjectInputStream(clienteAgencia.getInputStream());           
                 String[] datosTk = (String[]) entrada2.readObject();
@@ -56,6 +57,9 @@ public class ServidorSocket {
                 ObjectOutputStream respuesta = new ObjectOutputStream(clienteAgencia.getOutputStream());
                 respuesta.writeObject("Esa opcion no esta desarrollada, dame tiempo amigo");
                 
+            }
+            entrada1 = new ObjectInputStream(clienteAgencia.getInputStream());           
+            accion = (String) entrada1.readObject();
             }
             clienteAgencia.close();
             serverSocket.close();

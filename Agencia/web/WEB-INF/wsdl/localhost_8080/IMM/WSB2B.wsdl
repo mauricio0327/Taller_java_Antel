@@ -2,6 +2,10 @@
   <wsdl:types>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://logica/" elementFormDefault="unqualified" targetNamespace="http://logica/" version="1.0">
 
+  <xs:element name="anulacionIMM" type="tns:anulacionIMM"/>
+
+  <xs:element name="anulacionIMMResponse" type="tns:anulacionIMMResponse"/>
+
   <xs:element name="sayHello" type="tns:sayHello"/>
 
   <xs:element name="sayHelloResponse" type="tns:sayHelloResponse"/>
@@ -31,10 +35,10 @@
   <xs:complexType name="ticket">
     <xs:sequence>
       <xs:element minOccurs="0" name="agencia" type="xs:string"/>
-      <xs:element name="cantMin" type="xs:int"/>
+      <xs:element minOccurs="0" name="cantMin" type="xs:string"/>
       <xs:element minOccurs="0" name="codigo" type="xs:string"/>
       <xs:element minOccurs="0" name="fechaVenta" type="xs:dateTime"/>
-      <xs:element name="importeTotal" type="xs:double"/>
+      <xs:element minOccurs="0" name="importeTotal" type="xs:string"/>
       <xs:element minOccurs="0" name="inicioEstacionamiento" type="xs:dateTime"/>
       <xs:element minOccurs="0" name="matricula" type="xs:string"/>
       <xs:element minOccurs="0" name="numero" type="xs:string"/>
@@ -48,6 +52,19 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="anulacionIMM">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="anulacionIMMResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
 </xs:schema>
   </wsdl:types>
   <wsdl:message name="sayHello">
@@ -58,12 +75,20 @@
     <wsdl:part element="tns:ventaIMMResponse" name="parameters">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="anulacionIMMResponse">
+    <wsdl:part element="tns:anulacionIMMResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="sayHelloResponse">
     <wsdl:part element="tns:sayHelloResponse" name="parameters">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="ventaIMM">
     <wsdl:part element="tns:ventaIMM" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="anulacionIMM">
+    <wsdl:part element="tns:anulacionIMM" name="parameters">
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="WSB2B">
@@ -77,6 +102,12 @@
       <wsdl:input message="tns:ventaIMM" name="ventaIMM">
     </wsdl:input>
       <wsdl:output message="tns:ventaIMMResponse" name="ventaIMMResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="anulacionIMM">
+      <wsdl:input message="tns:anulacionIMM" name="anulacionIMM">
+    </wsdl:input>
+      <wsdl:output message="tns:anulacionIMMResponse" name="anulacionIMMResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -97,6 +128,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="ventaIMMResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="anulacionIMM">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="anulacionIMM">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="anulacionIMMResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

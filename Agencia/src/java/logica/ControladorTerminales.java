@@ -44,13 +44,13 @@ public class ControladorTerminales implements ITerminales{
             InitialContext initContext = new InitialContext();
             DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
             Connection conn = ds.getConnection(); 
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO tickets (numero, codigo, terminal, "
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO ticketst (numero, codigo, terminal, "
                     + "matricula, fechaVenta, importe) VALUES (?,?,?,?,?,?)");
             ps.setString(1, tk.getNumero());
             ps.setString(2, tk.getCodigo());
             ps.setString(3, tk.getTerminal());
             ps.setString(4, tk.getMatricula());
-            ps.setDate(5, (Date) tk.getFechaVenta());
+            ps.setDate(5, new java.sql.Date(tk.getFechaVenta().getTime()));
             ps.setString(6, tk.getImporteTotal());
             ps.executeUpdate();
             ps.close();
