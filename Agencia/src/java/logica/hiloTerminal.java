@@ -63,7 +63,7 @@ public class hiloTerminal extends Thread{
                     fabrica = Fabrica.getInstance();
                     ITerminales ITerm = fabrica.getiControladorTerminales();
 
-                    if (ITerm.controlAnulacion(datosTk[0])){
+                    if (ITerm.controlAnulacion(datosTk[1])){
 
                         controlIMM = ControladorIMM.getInstancia();
                         String codigo = controlIMM.anulacionTicketIMM(datosTk[1], "agencia1");
@@ -74,7 +74,7 @@ public class hiloTerminal extends Thread{
                         }else{
                             fabrica = Fabrica.getInstance();
                             ITerm = fabrica.getiControladorTerminales();
-                            ITerm.anulacionTicketTerminal(datosTk[0], codigo);
+                            ITerm.anulacionTicketTerminal(datosTk[1], codigo);
                             ObjectOutputStream respuesta = new ObjectOutputStream(clienteAgencia.getOutputStream());
                             respuesta.writeObject("Ticket "+datosTk[1] +" anulado");
                         }

@@ -52,7 +52,7 @@ public class ControladorTerminales implements ITerminales{
             ps.setString(2, "");
             ps.setString(3, tk.getTerminal());
             ps.setString(4, tk.getMatricula());
-            ps.setDate(5, new java.sql.Date(tk.getFechaVenta().getTime()));
+            ps.setTimestamp(5, new java.sql.Timestamp(tk.getFechaVenta().getTime()));
             ps.setString(6, tk.getImporteTotal());
             ps.executeUpdate();
             ps.close();
@@ -68,22 +68,23 @@ public class ControladorTerminales implements ITerminales{
     @Override
     public boolean controlAnulacion(String numero){
         
-        boolean b = true;
+        boolean b = false;
         try {
-            
+            System.out.println("Antes de la base");
             InitialContext initContext = new InitialContext();
             DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
             Connection conn = ds.getConnection(); 
             PreparedStatement ps = conn.prepareStatement("select * from ticketst where numero = ?"); 
             ps.setString(1, numero);
             ResultSet rs = ps.executeQuery();
-            if (rs.first()){
-                if(!rs.getString("codigo").equals("")){
-                    b = false;
+            System.out.println("A ver aca");
+            while (rs.next()){
+                if(rs.getString("codigo").equals("")){
+                    System.out.println("Entro");
+                    b = true;
                 }
-            }else{
-                b = false;
-            }            
+            }
+            System.out.println(b);
             ps.close();
             conn.close();
             
