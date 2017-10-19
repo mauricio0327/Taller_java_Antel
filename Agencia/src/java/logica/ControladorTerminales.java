@@ -67,7 +67,7 @@ public class ControladorTerminales implements ITerminales{
 
     @Override
     public boolean controlAnulacion(String numero){
-        
+        System.out.println("entro al control");
         boolean b = false;
         try {
             System.out.println("Antes de la base");
