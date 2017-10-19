@@ -71,9 +71,10 @@ and open the template in the editor.
             
         </h:form>
         <h:form>
-            <h:panelGrid>                
-                <h:commandButton value="Volver" action="index"></h:commandButton>
-            </h:panelGrid>
+            <h:panelGrid columns="1">
+                  <h:commandButton value="Volver" action="index"></h:commandButton>  
+                  <h:commandButton value="Salir" action="#{loginBeans.logout()}"></h:commandButton>
+              </h:panelGrid>
         </h:form>
     </center>
     </h:body>

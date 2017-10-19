@@ -39,6 +39,9 @@ public class LoginBeans {
     
     private String user;
     private String pass;
+    private String pass2;
+    private String nombre;
+    private String apellido;
 
     public String getUser() {
         return user;
@@ -55,6 +58,31 @@ public class LoginBeans {
     public void setPass(String pass) {
         this.pass = pass;
     }
+    
+    public String getPass2() {
+        return pass2;
+    }
+
+    public void setPass2(String pass2) {
+        this.pass2 = pass2;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+    
     
     public void logeo() throws NamingException, SQLException{
         String mensaje="";
@@ -121,4 +149,35 @@ public class LoginBeans {
         return pagina;
     }
     
+    public String logout(){
+        ControladorIMM.getInstancia().setLogeo(false);
+        return "login";
+    }
+    
+    public void agregaruser() {
+        if (pass.equals(pass2)){
+            try {
+                InitialContext initContext;
+                initContext = new InitialContext();
+                DataSource ds;
+                ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+                Connection conn = ds.getConnection(); 
+                PreparedStatement ps3 = conn.prepareStatement("INSERT INTO userimm (user, pass, nombre, apellido) VALUES (?,?,?,?)");
+                ps3.setString(1, user);
+                ps3.setString(2, pass);
+                ps3.setString(3, nombre);
+                ps3.setString(4, apellido);
+                ps3.executeUpdate();
+                ps3.close();
+                conn.close();
+            } catch (NamingException ex) {
+                FacesContext.getCurrentInstance().addMessage("idMessaDge", new FacesMessage("Error al guardar usuario en la base de datos"));
+            } catch (SQLException ex) {
+                FacesContext.getCurrentInstance().addMessage("idMessaDge", new FacesMessage("Error al guardar usuario en la base de datos"));
+            }    
+        } else {
+            FacesContext.getCurrentInstance().addMessage("idMessaDge", new FacesMessage("No coinciden las password"));
+        }
+        
+    }
 }

@@ -93,17 +93,15 @@ public class ControladorIMM implements IAdminIMM{
         String num = "0";
         String num2 = "0";
         boolean valida = false;
-        InitialContext initContext;
+        
         try {
+            InitialContext initContext;
             initContext = new InitialContext();
             DataSource ds;
             ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
-            System.out.println("DS");
             Connection conn = ds.getConnection(); 
-            System.out.println("Connection");
             PreparedStatement ps = conn.prepareStatement("select * from agencias"); 
             ResultSet rs = ps.executeQuery();
-            System.out.println("Query");
             String a2 = "";
             while ((rs.next())&&(!valida)) {
                 if (rs.getString("nombre").equals(ticket.getAgencia())){
@@ -117,11 +115,11 @@ public class ControladorIMM implements IAdminIMM{
                 System.out.println("PS2");
                 //num=rs2.getString("numero");
                 while (rs2.next()){
-                    if((rs2.getString("codigo")).equals("")){
+                    
                         num2=rs2.getString("numero");
                         if ((Integer.parseInt(num2))>(Integer.parseInt(num))){
                             num=num2;
-                        }
+                      
                     }                        
                 }
                 int n2 = Integer.parseInt(num);
