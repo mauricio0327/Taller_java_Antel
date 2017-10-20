@@ -15,6 +15,8 @@
     <servlet>
         <servlet-name>ServletTotalDiario</servlet-name>
         <servlet-class>logica.ServletTotalDiario</servlet-class>
+        <servlet-name>ServletLogin</servlet-name>
+        <servlet-class>logica.ServletLogin</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsuario</servlet-name>
@@ -34,6 +36,8 @@
     <servlet-mapping>
         <servlet-name>ServletTotalDiario</servlet-name>
         <url-pattern>/ServletTotalDiario</url-pattern>
+        <servlet-name>ServletLogin</servlet-name>
+        <url-pattern>/ServletLogin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
