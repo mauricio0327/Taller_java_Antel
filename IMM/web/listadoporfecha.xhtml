@@ -9,13 +9,13 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
     <head>
-        <title>TODO supply a title</title>
+        <title>Listado por fechas</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     
         <h:body>
         <center>
-        <h1>Listado por fecha</h1>
+        <h1>Listado por fechas</h1>
         <h:form>
             
             <h:dataTable value="#{reportesBeans.tickets}" var="tk" styleClass="two">
@@ -71,9 +71,10 @@ and open the template in the editor.
             
         </h:form>
         <h:form>
-            <h:panelGrid>                
-                <h:commandButton value="Volver" action="index"></h:commandButton>
-            </h:panelGrid>
+            <h:panelGrid columns="1">
+                  <h:commandButton value="Volver" action="index"></h:commandButton>  
+                  <h:commandButton value="Salir" action="#{loginBeans.logout()}"></h:commandButton>
+              </h:panelGrid>
         </h:form>
     </center>
     </h:body>

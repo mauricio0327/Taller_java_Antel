@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.InitialContext;
@@ -65,6 +64,7 @@ public class ControladorIMM implements IAdminIMM{
     }
 
  
+    @Override
     public boolean loginAdmin(DtUsuario dtUser) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -93,17 +93,15 @@ public class ControladorIMM implements IAdminIMM{
         String num = "0";
         String num2 = "0";
         boolean valida = false;
-        InitialContext initContext;
+        
         try {
+            InitialContext initContext;
             initContext = new InitialContext();
             DataSource ds;
             ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
-            System.out.println("DS");
             Connection conn = ds.getConnection(); 
-            System.out.println("Connection");
             PreparedStatement ps = conn.prepareStatement("select * from agencias"); 
             ResultSet rs = ps.executeQuery();
-            System.out.println("Query");
             String a2 = "";
             while ((rs.next())&&(!valida)) {
                 if (rs.getString("nombre").equals(ticket.getAgencia())){
@@ -117,10 +115,16 @@ public class ControladorIMM implements IAdminIMM{
                 System.out.println("PS2");
                 //num=rs2.getString("numero");
                 while (rs2.next()){
+
                         num2=rs2.getString("numero");
                         if ((Integer.parseInt(num2))>(Integer.parseInt(num))){
                             num=num2;
+
                         }                     
+
+                      
+                    }                        
+
                 }
                 int n2 = Integer.parseInt(num);
                 n2=n2+1;
@@ -137,20 +141,14 @@ public class ControladorIMM implements IAdminIMM{
                 ps3.setString(8, importe(ticket.getCantMin()));
                 ps3.executeUpdate();
                 ps3.close();
-                ps2.close();
                 ps.close();
                 conn.close();
-            
-        }
             
         } catch (NamingException ex) {
             Logger.getLogger(ControladorIMM.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ControladorIMM.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
+        }        
         return num;
     }
 
