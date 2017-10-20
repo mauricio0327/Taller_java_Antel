@@ -117,12 +117,10 @@ public class ControladorIMM implements IAdminIMM{
                 System.out.println("PS2");
                 //num=rs2.getString("numero");
                 while (rs2.next()){
-                    if((rs2.getString("codigo")).equals("")){
                         num2=rs2.getString("numero");
                         if ((Integer.parseInt(num2))>(Integer.parseInt(num))){
                             num=num2;
-                        }
-                    }                        
+                        }                     
                 }
                 int n2 = Integer.parseInt(num);
                 n2=n2+1;
