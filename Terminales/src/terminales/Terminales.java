@@ -35,7 +35,7 @@ public class Terminales {
         try {
             // TODO code application logic here
             String nombre;
-            boolean existeu = false;
+            /*boolean existeu = false;
             boolean logeo = false;
             String passbd = "";
             String url = "jdbc:mysql://localhost:3306/mysqldb";
@@ -64,7 +64,7 @@ public class Terminales {
                 if (logeo){
                     System.out.println("Logeo existoso");
                 }
-            }
+            }*/
 
             try (Socket clienteTerminal = new Socket("localhost", 5000)) {
                 System.out.println("Ingrese el nombre de su terminal");
