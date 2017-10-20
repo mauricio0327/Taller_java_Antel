@@ -12,6 +12,10 @@
         <servlet-name>ServletPrincipal</servlet-name>
         <servlet-class>logica.ServletPrincipal</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletLogin</servlet-name>
+        <servlet-class>logica.ServletLogin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsuario</servlet-name>
         <url-pattern>/ServletUsuario</url-pattern>
@@ -26,6 +30,10 @@
     <servlet-mapping>
         <servlet-name>ServletPrincipal</servlet-name>
         <url-pattern>/ServletPrincipal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletLogin</servlet-name>
+        <url-pattern>/ServletLogin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
