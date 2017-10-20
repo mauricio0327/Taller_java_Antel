@@ -12,7 +12,8 @@
         <title>Agencia de Cobranza</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-            
+        <h1>Reportes Agencia de Cobranza</h1>
+        <br>
+        <A href="ServletTotalDiario"> Reporte diario de tickets </A>    
     </body>
 </html>

@@ -8,9 +8,14 @@ package logica;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -70,8 +75,57 @@ public class ControladorAgencia implements IAdminAgencia{
     }
 
     @Override
+    @SuppressWarnings("empty-statement")
     public ArrayList<Ticket> ventaTotalDiaria() {
-        return null;
+        
+        ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+        try {
+            InitialContext initContext = new InitialContext();
+            DataSource ds = (DataSource) initContext.lookup("java:jboss/datasources/MySqlDS");
+            Connection conn = ds.getConnection();
+            PreparedStatement ps = conn.prepareStatement("select * from ticketst");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Date fechaTicket = (Date) rs.getDate("fechaVenta");
+                String fechaActual = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                if(fechaActual.equals(fechaTicket.toString())){
+                    System.out.println("llego 9");
+                    String numero = rs.getString("numero");
+                    String terminal = rs.getString("terminal");
+                    String matricula = rs.getString("matricula");
+                    String importe = rs.getString("importe");
+                    Ticket t = new Ticket();
+                    t.setNumero(numero);
+                    t.setMatricula(matricula);
+                    t.setImporteTotal(importe);
+                    t.setTerminal(terminal);
+                    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                    Date fechaDate = null;
+                    try {
+                        fechaDate = formato.parse(fechaTicket.toString());
+                    } 
+                    catch (ParseException ex) 
+                    {
+                        System.out.println(ex);
+                    }
+                    //t.setFechaVenta(fechaTicket);
+                    //Ticket t = new Ticket(numero, terminal, matricula, fechaTicket, new Date(), "0", importe, "agencia1");
+                    System.out.println(fechaDate);
+                    tickets.add(t);
+                    System.out.println("llego 11");
+                }
+            } 
+            ps.close();
+            conn.close();
+        }catch (SQLException ex) {
+            System.out.println("Error al conectar SQL en venta total diaria");
+        } catch (NamingException ex) {      
+            Logger.getLogger(ControladorAgencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(int i=0; i<tickets.size(); i++){
+            System.out.println(tickets.get(i).getNumero());
+        };
+        return tickets;
     }
 
     @Override
