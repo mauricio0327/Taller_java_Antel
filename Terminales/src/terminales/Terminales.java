@@ -34,9 +34,9 @@ public class Terminales {
     public static void main(String[] args) throws SQLException {
         try {
             // TODO code application logic here
-            String nombre;
-            /*boolean existeu = false;
+            String nombre;            
             boolean logeo = false;
+            /*boolean existeu = false;
             String passbd = "";
             String url = "jdbc:mysql://localhost:3306/mysqldb";
             String user = "root";
@@ -46,27 +46,43 @@ public class Terminales {
             System.out.println("Conectando...");
             PreparedStatement ps2 = conn.prepareStatement("select * from userterm"); 
             ResultSet rs2 = ps2.executeQuery();
-            while (!logeo) {   
+            */
+
+            try (Socket clienteTerminal = new Socket("localhost", 5000)) {
+               while (!logeo) {
+                ObjectOutputStream mensajel = new ObjectOutputStream(clienteTerminal.getOutputStream());
+                mensajel.writeObject("logeo");    
                 System.out.println("Ingrese usuario");
                 BufferedReader bufUsuario = new BufferedReader(new InputStreamReader(System.in));
                 String usuario = bufUsuario.readLine();
                 System.out.println("Ingrese pass");
                 BufferedReader bufcontra = new BufferedReader(new InputStreamReader(System.in));
                 String contra = bufcontra.readLine();
-                while ((rs2.next())&&(!existeu)) {
+                String[] du = new String[2];
+                du[0] = usuario;
+                du[1] = contra;
+                System.out.println("A ver "+du[0]+" "+du[1]);
+                
+                ObjectOutputStream mensajel2 = new ObjectOutputStream(clienteTerminal.getOutputStream());
+                mensajel2.writeObject(du);
+                   
+                ObjectInputStream respuestal = new ObjectInputStream(clienteTerminal.getInputStream());
+                String resultadol = (String) respuestal.readObject();
+                System.out.println("Respuesta");
+                System.out.println(resultadol);
+                
+                /*while ((rs2.next())&&(!existeu)) {
                     if (rs2.getString("user").equals(usuario)){
                         existeu=true;
                         passbd=rs2.getString("pass");
                     }
 
-                }
-                logeo = passbd.equals(contra);
+                }*/
+                logeo = ((String) resultadol).equals("Ok");
                 if (logeo){
                     System.out.println("Logeo existoso");
                 }
-            }*/
-
-            try (Socket clienteTerminal = new Socket("localhost", 5000)) {
+            }
                 System.out.println("Ingrese el nombre de su terminal");
                 BufferedReader nombreTerm = new BufferedReader(new InputStreamReader(System.in));
                 nombre = nombreTerm.readLine();
