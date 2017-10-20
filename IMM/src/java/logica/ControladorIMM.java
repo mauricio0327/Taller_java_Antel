@@ -115,13 +115,10 @@ public class ControladorIMM implements IAdminIMM{
                 System.out.println("PS2");
                 //num=rs2.getString("numero");
                 while (rs2.next()){
-
+                    
                         num2=rs2.getString("numero");
                         if ((Integer.parseInt(num2))>(Integer.parseInt(num))){
                             num=num2;
-
-                        }                     
-
                       
                     }                        
 
@@ -143,6 +140,7 @@ public class ControladorIMM implements IAdminIMM{
                 ps3.close();
                 ps.close();
                 conn.close();
+            }    
             
         } catch (NamingException ex) {
             Logger.getLogger(ControladorIMM.class.getName()).log(Level.SEVERE, null, ex);
