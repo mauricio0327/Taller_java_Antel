@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>IMM</title>
+    </h:head>
+    <h:body>
+          <h:form>
+              <h:panelGrid columns="1">
+                  <h:outputText value="#{reportesBeans.bienvenida()}"></h:outputText>
+                  <h:commandButton value="Agregar usuario" action="agregarusuario"></h:commandButton>
+                  <h:commandButton value="Reporte mensual" action="#{reportesBeans.reportesMensuales()}"></h:commandButton>
+              </h:panelGrid>
+          </h:form>
+              
+          <h:form>
+              <h:panelGrid columns="2">
+                <h:outputText value="Fecha inicio en formato dd/mm/aaaa"></h:outputText>
+                <h:inputText value="#{reportesBeans.fechaInicio}" required="true" requiredMessage="Campo fecha obligatorio">
+                    <f:validator validatorId="miValidator"/>
+                </h:inputText>
+                <h:outputText value="Fecha fin en formato dd/mm/aaaa"></h:outputText>
+                <h:inputText value="#{reportesBeans.fechaFin}" required="true" requiredMessage="Campo fecha obligatorio">
+                    <f:validator validatorId="miValidator"/>
+                </h:inputText>
+                <h:commandButton value="Reporte por periodo" action="#{reportesBeans.reportesPorFechas()}"></h:commandButton>
+              </h:panelGrid>
+             </h:form>
+             <h:form>
+            <h:panelGrid columns="1">
+                  <h:commandButton value="Salir" action="#{loginBeans.logout()}"></h:commandButton>
+             </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <head>
+        <title>Listado mensual</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    
+        <h:body>
+        <center>
+        <h1>Listado mensual</h1>
+        <h:form>
+            
+            <h:dataTable value="#{reportesBeans.tickets}" var="tk" styleClass="two">
+                <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Numero"/>
+                        </f:facet>
+                    <h:outputText value="#{tk.numero}"/>
+                </h:column>
+                <h:column>
+                      <f:facet name="header">
+                            <h:outputText value="Codigo"/>
+                        </f:facet>
+                    <h:outputText value="#{tk.codigo}"/>
+                </h:column>   
+                
+                <h:column>
+                      <f:facet name="header">
+                            <h:outputText value="Agencia"/>
+                        </f:facet>
+                    <h:outputText value="#{tk.agencia}"/>
+                </h:column> 
+                <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha venta"/>
+                        </f:facet>
+                    <h:outputText value="#{tk.fechaVenta}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                    </h:outputText>    
+                </h:column>
+                <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha inicio"/>
+                        </f:facet>
+                    <h:outputText value="#{tk.inicioEstacionamiento}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cantidad de minutos"/>
+                        </f:facet>
+                    <h:outputText value="#{tk.cantMin}"/>
+                </h:column>
+                <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Importe"/>
+                        </f:facet>
+                    <h:outputText value="#{tk.importeTotal}"/>
+                </h:column>
+            </h:dataTable>
+            
+            
+        </h:form>
+        <h:form>
+            <h:panelGrid columns="1">
+                  <h:commandButton value="Volver" action="index"></h:commandButton>  
+                  <h:commandButton value="Salir" action="#{loginBeans.logout()}"></h:commandButton>
+              </h:panelGrid>
+        </h:form>
+    </center>
+    </h:body>
+    
+</html>

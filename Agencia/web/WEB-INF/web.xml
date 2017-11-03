@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <servlet>
+        <servlet-name>ServletUsuario</servlet-name>
+        <servlet-class>logica.ServletUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletPrueba</servlet-name>
+        <servlet-class>logica.ServletPrueba</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletPrincipal</servlet-name>
+        <servlet-class>logica.ServletPrincipal</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletTotalDiario</servlet-name>
+        <servlet-class>logica.ServletTotalDiario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletLogin</servlet-name>
+        <servlet-class>logica.ServletLogin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletUsuario</servlet-name>
+        <url-pattern>/ServletUsuario</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>ServletPrincipal</welcome-file>
+    </welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>ServletPrincipal</servlet-name>
+        <url-pattern>/ServletPrincipal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletTotalDiario</servlet-name>
+        <url-pattern>/ServletTotalDiario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletLogin</servlet-name>
+        <url-pattern>/ServletLogin</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
