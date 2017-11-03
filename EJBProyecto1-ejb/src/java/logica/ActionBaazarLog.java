@@ -5,17 +5,10 @@
  */
 package logica;
 
-import javax.ejb.Local;
-import javax.ejb.Timer;
-
 /**
  *
  * @author Salvador
  */
-@Local
-public interface PlaceBidBeanLocal {
-    
-    public void placeBid(Bid bid);
-    public void cronTest(Timer timer);
+public class ActionBaazarLog {
     
 }

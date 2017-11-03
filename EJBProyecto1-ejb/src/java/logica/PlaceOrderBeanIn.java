@@ -6,16 +6,22 @@
 package logica;
 
 import javax.ejb.Local;
-import javax.ejb.Timer;
 
 /**
  *
  * @author Salvador
  */
+
 @Local
-public interface PlaceBidBeanLocal {
+public interface PlaceOrderBeanIn {
     
-    public void placeBid(Bid bid);
-    public void cronTest(Timer timer);
+    public void postConstruct();
+    void addItem(ItemVO item);
+    void setShippingInfo(String shippingAddres);
+    void setBillingInfo(String billingInfo);
+    long confirmOrder();
+    public String datos();
+    public void sendMessage();
+    
     
 }
