@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebEndpoint;
 import logica.Bid;
 import logica.PlaceBidBeanLocal;
+import logica.PremiumBid;
+import logica.SimpleBid;
 
 /**
  *
@@ -29,9 +31,9 @@ public class ActionBaazarGUI extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init(); 
-        Bid b = new Bid();
-        b.setName("Statless bean");
-        placeBidLocal.placeBid(b);
+        //Bid b = new Bid();
+        //b.setName("Statless bean");
+       // placeBidLocal.placeBid(b);
         
     }
     
@@ -62,9 +64,19 @@ public class ActionBaazarGUI extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        Bid b = new Bid();
-        b.setName("Statless bean");
-        placeBidLocal.placeBid(b);
+        System.out.println("Llego");
+        Bid bid = null;
+        System.out.println(request.getParameter("select"));
+        if (request.getParameter("select").equals("simple")){
+            bid = new SimpleBid();
+            ((SimpleBid)bid).setSimpleDescr("simple " + request.getParameter("desc"));
+        } else
+            if (request.getParameter("select").equals("premium")){
+                bid = new PremiumBid();
+            ((PremiumBid)bid).setPremiumDescrip("premium " + request.getParameter("desc"));                
+            }
+        placeBidLocal.guardar(bid);
+        response.sendRedirect("ActianBaazar.jsp");
     }
 
     /**

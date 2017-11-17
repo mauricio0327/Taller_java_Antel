@@ -9,17 +9,49 @@ import java.io.Serializable;
 import javax.ejb.Schedule;
 import javax.ejb.Schedules;
 import javax.ejb.Timer;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Salvador
  */
+@Entity
+@Table(name="AB_Order")
 public class ItemVO implements Serializable{
     
     private String nombre;
+    @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+    private int bidid;
     private String shippingAddress;
     private String billingInfo;
+    
+    @OneToOne(mappedBy = "order")
+    private Bid bid;
+
+    
+    public Bid getBid() {
+        return bid;
+    }
+
+    public void setBid(Bid bid) {
+        this.bid = bid;
+    }
+
+    public int getBidid() {
+        return bidid;
+    }
+
+    public void setBidid(int bidid) {
+        this.bidid = bidid;
+    }
+    
+    
     
 
     public String getNombre() {

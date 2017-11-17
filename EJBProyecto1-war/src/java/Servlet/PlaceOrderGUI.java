@@ -48,6 +48,8 @@ public class PlaceOrderGUI extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String operation = request.getParameter("operation");
+        String temp = " ";
+        
         if("shippingAddress".equals(operation)){
             System.out.println("Setea shipping address");
             placeOrderBeanIn.setShippingInfo(request.getParameter("shippingAddress"));
@@ -56,20 +58,27 @@ public class PlaceOrderGUI extends HttpServlet {
             System.out.println("Setea billing address");
             placeOrderBeanIn.setBillingInfo(request.getParameter("billingInfo"));
         }
+        if("bidId".equals(operation)){
+            System.out.println("Setea bid ID");
+            placeOrderBeanIn.setBidId(request.getParameter("bidId"));
+        }
         if("confirm".equals(operation)){
             placeOrderBeanIn.confirmOrder();
             System.out.println(placeOrderBeanIn.datos());
             placeOrderBeanIn.sendMessage();
+            temp = "Estado de la orden "+placeOrderBeanIn.getEstado();
         }
         if("init".equals(operation)){
             try {
                 System.out.println("inicio");
+                temp = "Estado de la orden "+placeOrderBeanIn.getEstado();
                 placeOrderBeanIn = InitialContext.doLookup("java:global/EJBProyecto1/EJBProyecto1-ejb/PlaceOrderBean!logica.PlaceOrderBeanIn");
             } catch (NamingException ex) {
                 Logger.getLogger(PlaceOrderGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
     
         }
+        request.setAttribute("mensaje", temp);
         response.sendRedirect("PlaceOrder.jsp");
     }
 

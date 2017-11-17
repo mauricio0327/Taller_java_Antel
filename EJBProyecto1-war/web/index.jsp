@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <A href="ActianBaazar.jsp"> Bid </A><br>
+        <A href="PlaceOrder.jsp"> Order </A>
     </body>
 </html>

@@ -18,10 +18,16 @@
     <body>
         <form action="ActionBaazarGUI" method="GET">                
                 <table>
-                        <tr>
-                                <td><input type="submit" value="Probar schudeler"></input></td>
-                        </tr>
-                </table>
+                <tr>
+                        <td><label for="desc">Description:</label> </td>
+                        <td><input type="text" name="desc"></input></td>
+                        Tipo <select name="select">
+                            <option value="simple">SimpleBid</option>
+                            <option value="premium">PremiumBid</option>
+                        </select>
+                        <td><input type="submit" value="Guardar"></input></td>
+                </tr>
+            </table>
         </form>
     </body>
 </html>

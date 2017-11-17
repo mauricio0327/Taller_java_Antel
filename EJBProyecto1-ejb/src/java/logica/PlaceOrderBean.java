@@ -18,6 +18,8 @@ import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -28,6 +30,7 @@ import javax.jms.TextMessage;
 public class PlaceOrderBean implements PlaceOrderBeanIn {
     
     ItemVO order;
+    Bid bid;
     
     @PostConstruct
     @Override
@@ -49,11 +52,23 @@ public class PlaceOrderBean implements PlaceOrderBeanIn {
     public void setBillingInfo(String billingInfo) {
         order.setBillingInfo(billingInfo);
     }
+    
+    public void setBidId(String bidId){
+        int i = Integer.parseInt(bidId);
+        order.setBidid(i);
+        
+    }
+    
+    @PersistenceContext
+    EntityManager em;
 
     @Override
-    public long confirmOrder() {
-        order.setId(42);
-        return 42;
+    public void confirmOrder() {
+        bid = em.find(Bid.class, order.getBidid());
+        bid.setOrder(order);
+        order.setBid(bid);
+        em.persist(order);
+        
     }
     
     public String datos(){
@@ -83,5 +98,11 @@ public class PlaceOrderBean implements PlaceOrderBeanIn {
             Logger.getLogger(PlaceOrderBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public String getEstado(){
+        return order.getState().toString();
+    }
+
+    
     
 }

@@ -19,7 +19,9 @@ public interface PlaceOrderBeanIn {
     void addItem(ItemVO item);
     void setShippingInfo(String shippingAddres);
     void setBillingInfo(String billingInfo);
-    long confirmOrder();
+    void setBidId(String bidId);
+    void confirmOrder();
+    public String getEstado();
     public String datos();
     public void sendMessage();
     

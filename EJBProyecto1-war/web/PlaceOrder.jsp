@@ -33,6 +33,16 @@
             </table>
         </form>
         <form action="PlaceOrderGUI" method="GET">
+            <table>
+                <tr>
+                        <td><label for="bidId">Bid ID:</label> </td>
+                        <td><input type="text" name="bidId"></input></td>
+                        <td><input type="submit" value="bidId"></input></td>
+                        <input type hidden name="operation" value="bidId" >
+                </tr>
+            </table>
+        </form>
+        <form action="PlaceOrderGUI" method="GET">
             <input type="submit" value="Confirmar"></input>
             <input type hidden name="operation" value="confirm" >
 
@@ -42,6 +52,7 @@
             <input type hidden name="operation" value="init" >
 
         </form>
+        <h3><%= request.getAttribute("mensaje") %></h3>
         <A href="index.jsp"> Volver </A>
     </body>
 </html>
