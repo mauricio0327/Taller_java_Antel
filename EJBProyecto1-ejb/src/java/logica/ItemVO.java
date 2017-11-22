@@ -10,6 +10,8 @@ import javax.ejb.Schedule;
 import javax.ejb.Schedules;
 import javax.ejb.Timer;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,8 +32,11 @@ public class ItemVO implements Serializable{
     private int bidid;
     private String shippingAddress;
     private String billingInfo;
+    @Enumerated(EnumType.STRING)
+    private State estado;
     
     @OneToOne(mappedBy = "order")
+    
     private Bid bid;
 
     
@@ -42,6 +47,16 @@ public class ItemVO implements Serializable{
     public void setBid(Bid bid) {
         this.bid = bid;
     }
+
+    public State getEstado() {
+        return estado;
+    }
+
+    public void setEstado(State estado) {
+        this.estado = estado;
+    }
+    
+    
 
     public int getBidid() {
         return bidid;

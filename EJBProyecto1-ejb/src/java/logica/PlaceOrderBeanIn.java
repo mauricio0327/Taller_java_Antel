@@ -21,7 +21,7 @@ public interface PlaceOrderBeanIn {
     void setBillingInfo(String billingInfo);
     void setBidId(String bidId);
     void confirmOrder();
-    public String getEstado();
+    public State getEstado();
     public String datos();
     public void sendMessage();
     

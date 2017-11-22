@@ -11,4 +11,6 @@ package logica;
  */
 public enum State {
     
+    IN_PROGRESS, DONE
+    
 }

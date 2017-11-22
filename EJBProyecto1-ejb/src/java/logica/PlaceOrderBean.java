@@ -36,6 +36,9 @@ public class PlaceOrderBean implements PlaceOrderBeanIn {
     @Override
     public void postConstruct(){
         order = new ItemVO();
+        order.setEstado(State.IN_PROGRESS);
+        em.persist(order);
+        
     }
 
     @Override
@@ -46,16 +49,22 @@ public class PlaceOrderBean implements PlaceOrderBeanIn {
     @Override
     public void setShippingInfo(String shippingAddres) {
         order.setShippingAddress(shippingAddres);
+        em.merge(order);
+        
     }
 
     @Override
     public void setBillingInfo(String billingInfo) {
         order.setBillingInfo(billingInfo);
+        em.merge(order);
+        
     }
     
     public void setBidId(String bidId){
         int i = Integer.parseInt(bidId);
         order.setBidid(i);
+        em.merge(order);
+        
         
     }
     
@@ -66,8 +75,12 @@ public class PlaceOrderBean implements PlaceOrderBeanIn {
     public void confirmOrder() {
         bid = em.find(Bid.class, order.getBidid());
         bid.setOrder(order);
+        em.merge(bid);
         order.setBid(bid);
-        em.persist(order);
+        //em.flush();
+        em.merge(order);
+            
+        
         
     }
     
@@ -94,13 +107,16 @@ public class PlaceOrderBean implements PlaceOrderBeanIn {
             session.close();
             conn.close();
             System.out.println("Mensaje enviado");
+            order.setEstado(State.DONE);
+            em.merge(order);
+            
         } catch (JMSException ex) {
             Logger.getLogger(PlaceOrderBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public String getEstado(){
-        return order.getState().toString();
+    public State getEstado(){
+        return order.getEstado();
     }
 
     
