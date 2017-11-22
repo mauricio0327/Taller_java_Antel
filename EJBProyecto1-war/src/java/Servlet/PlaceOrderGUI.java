@@ -42,13 +42,15 @@ public class PlaceOrderGUI extends HttpServlet {
     
     public void init() throws ServletException {
         super.init(); 
+        
         }
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String operation = request.getParameter("operation");
-        String temp = " ";
+        String temp;
+        temp = "Inicie la compra";
         
         if("shippingAddress".equals(operation)){
             System.out.println("Setea shipping address");
@@ -66,19 +68,22 @@ public class PlaceOrderGUI extends HttpServlet {
             placeOrderBeanIn.confirmOrder();
             System.out.println(placeOrderBeanIn.datos());
             placeOrderBeanIn.sendMessage();
-            temp = "Estado de la orden "+placeOrderBeanIn.getEstado();
+            temp = "Estado de la orden "+placeOrderBeanIn.getEstado().toString();
+            System.out.println(temp);
         }
         if("init".equals(operation)){
             try {
-                System.out.println("inicio");
-                temp = "Estado de la orden "+placeOrderBeanIn.getEstado();
+                System.out.println("inicio");                
                 placeOrderBeanIn = InitialContext.doLookup("java:global/EJBProyecto1/EJBProyecto1-ejb/PlaceOrderBean!logica.PlaceOrderBeanIn");
+                temp = "Estado de la orden " + placeOrderBeanIn.getEstado().toString();
+                System.out.println(temp);
             } catch (NamingException ex) {
                 Logger.getLogger(PlaceOrderGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
     
         }
         request.setAttribute("mensaje", temp);
+        response.setHeader("mensaje", temp);
         response.sendRedirect("PlaceOrder.jsp");
     }
 

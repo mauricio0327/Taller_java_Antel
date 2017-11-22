@@ -13,6 +13,10 @@
     </head>
     <body>
         <A href="ActianBaazar.jsp"> Bid </A><br>
-        <A href="PlaceOrder.jsp"> Order </A>
+        <A href="PlaceOrder.jsp"> Order </A><br>
+        <form action="Listado" method="GET">
+            <input type="submit" value="Listado"></input>
+
+        </form>
     </body>
 </html>

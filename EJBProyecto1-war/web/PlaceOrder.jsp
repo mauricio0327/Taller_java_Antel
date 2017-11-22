@@ -52,7 +52,8 @@
             <input type hidden name="operation" value="init" >
 
         </form>
-        <h3><%= request.getAttribute("mensaje") %></h3>
+        <%= request.getAttribute("mensaje") %> 
+        <%= response.getHeader("mensaje") %>
         <A href="index.jsp"> Volver </A>
     </body>
 </html>

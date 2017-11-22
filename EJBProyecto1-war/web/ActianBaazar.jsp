@@ -29,5 +29,6 @@
                 </tr>
             </table>
         </form>
+        <A href="index.jsp"> Volver </A>
     </body>
 </html>
